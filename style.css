@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  background: #fff;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 100px;
+  gap: 0px 20px;
+  width: clamp(70vmin, 900px, 90%);
+
+
+}
+
+.gallery:has(img:hover) img:not(:hover){
+  filter: grayscale();
+}
+
+.gallery img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0 20px, 100% 0, 100% calc(100% - 20px), 0 100%);
+  border: 5px solid rgb(0, 0, 0);
+  transition: transform 0.5s, clip-path 0.5s,filter 0.75s;
+  transform: scale(1);
+  cursor: pointer;
+}
+
+.gallery img:hover {
+  transform: scale(1.4);
+  border-radius: 15px;
+  z-index: 1;
+  width: 100%;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  border: 5px solid rgb(255, 255, 255);
+
+}
+
+.gallery img:nth-child(3n){
+  grid-row: span 2;
+}
+.gallery img:nth-last-child(-n+4){
+  grid-row: span 1;
+}
+.gallery img:nth-child(14n){
+  grid-row: span 2;
+}
+
+
+
+
+
+.gallery .spacer {
+  background: rgb(0, 0, 0);
+  border-radius: 15px;
+  clip-path: polygon(0 20px, 100% 0, 100% calc(100% - 20px), 0 100%);
+}
+
+.gallery .quote{
+  grid-row: span 3;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color:#eee;
+  font-size: 0.9em;
+  font-family: Montserrat;
+}
+
+.quote span{
+  text-wrap: balance;
+  margin: 0 auto 15px auto;
+  max-width: 80%;
+  line-height: 1.5;
+}
+
+span::before{
+  content: "";
+  font-size: 4em;
+  vertical-align: middle;
+  line-height: 0;
+  color: #fff8;
+
+}
+
+/* responsive */
+
+@media all and (max-width:700px){
+  .gallery{
+    grid-template-columns: repeat(3,1fr);
+  }
+}
+
+@media all and (max-width:500px){
+  .gallery{
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media all and (max-width:400px){
+  .gallery{
+    grid-template-columns: repeat(1,1fr);
+  }
+}
+
